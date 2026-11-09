@@ -1,7 +1,9 @@
 <div align="center">
 
-<!-- Anime Header GIF (Bisa diganti dengan GIF anime favorit Anda) -->
-<img src="https://media.giphy.com/media/qgQUggCGvnPZG/giphy.gif" width="600" alt="Anime Coding GIF">
+<!-- Header Animasi GIF -->
+<img src="./banner.gif" width="100%" alt="Anime Header Banner">
+<br>
+<sub>Video by <a href="https://pixabay.com/users/free24h-42809302/?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=205733">FREE24h</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=video&utm_content=205733">Pixabay</a></sub>
 
 # ⛩️ Kon'nichiwa, I'm Egyanta Bareka! 👋
 
@@ -9,10 +11,10 @@
 
 *“Data is like raw code in the Matrix; you just need the right algorithms to see the truth.”*
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/egyanta)
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://instagram.com/)
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@gmail.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-%23FF4081.svg?style=for-the-badge&logo=firefox-browser&logoColor=white)](https://egyantabarekasebayang.id)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/egyanta-bareka-sebayang)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/egyanta.bareka.sebayang/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:egyantabarekasebayang@gmail.com)
 
 </div>
 
@@ -83,8 +85,8 @@
 ### 🌸 Sakura Contributions:
 
 <div align="center">
-  <!-- Grafik Kontribusi dengan warna Sakura (Hex: FF9EBB) -->
-  <img src="https://ghchart.rshah.org/FF9EBB/Sony1866" alt="Sony1866's Github Contributions in Sakura Theme" />
+  <!-- Menampilkan animasi SVG Bunga Sakura hasil generate dari GitHub Actions -->
+  <img src="https://raw.githubusercontent.com/Sony1866/Sony1866/output/sakura-contribution.svg" alt="Sakura Contribution Graph" />
 </div>
 
 <br>
