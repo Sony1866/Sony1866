@@ -1,0 +1,56 @@
+name: Generate Sakura Contribution Graph
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Generate Sakura SVG
+        run: |
+          curl -s https://ghchart.rshah.org/FF9EBB/Sony1866 > raw.svg
+          
+          python3 -c '
+          import re
+          with open("raw.svg", "r") as f:
+              svg = f.read()
+
+          svg = svg.replace("<svg ", "<svg style=\"background-color:#0D1117; border-radius:10px; padding:10px;\" ")
+
+          def rect_to_sakura(match):
+              full_rect = match.group(0)
+              if "#eeeeee" in full_rect.lower() or "data-score=\"0\"" in full_rect:
+                  return re.sub(r"fill=\"[^\"]+\"", "fill=\"#161b22\" rx=\"2\" ry=\"2\"", full_rect)
+              
+              x_m = re.search(r"x=\"([^\"]+)\"", full_rect)
+              y_m = re.search(r"y=\"([^\"]+)\"", full_rect)
+              if x_m and y_m:
+                  x = float(x_m.group(1))
+                  y = float(y_m.group(1)) + 9
+                  return f"<text x=\"{x}\" y=\"{y}\" font-size=\"10\">🌸</text>"
+              return full_rect
+
+          sakura_svg = re.sub(r"<rect[^>]+/>", rect_to_sakura, svg)
+          with open("sakura-contribution.svg", "w") as f:
+              f.write(sakura_svg)
+          '
+
+      - name: Push Sakura SVG to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: .
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
