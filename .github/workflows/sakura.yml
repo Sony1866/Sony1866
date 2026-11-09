@@ -19,20 +19,27 @@ jobs:
 
       - name: Generate Sakura SVG
         run: |
+          # Buat folder khusus untuk hasil akhir
+          mkdir -p dist
           curl -s https://ghchart.rshah.org/FF9EBB/Sony1866 > raw.svg
           
-          python3 -c '
+          # Tulis script Python ke dalam file untuk menghindari error spasi YAML
+          cat << 'EOF' > generate.py
           import re
+
           with open("raw.svg", "r") as f:
               svg = f.read()
 
+          # Ubah background menjadi gelap
           svg = svg.replace("<svg ", "<svg style=\"background-color:#0D1117; border-radius:10px; padding:10px;\" ")
 
           def rect_to_sakura(match):
               full_rect = match.group(0)
+              # Jika kotak kosong / tidak ada commit
               if "#eeeeee" in full_rect.lower() or "data-score=\"0\"" in full_rect:
                   return re.sub(r"fill=\"[^\"]+\"", "fill=\"#161b22\" rx=\"2\" ry=\"2\"", full_rect)
               
+              # Jika ada commit, ganti jadi 🌸
               x_m = re.search(r"x=\"([^\"]+)\"", full_rect)
               y_m = re.search(r"y=\"([^\"]+)\"", full_rect)
               if x_m and y_m:
@@ -42,15 +49,19 @@ jobs:
               return full_rect
 
           sakura_svg = re.sub(r"<rect[^>]+/>", rect_to_sakura, svg)
-          with open("sakura-contribution.svg", "w") as f:
+          
+          # Simpan ke folder dist
+          with open("dist/sakura-contribution.svg", "w") as f:
               f.write(sakura_svg)
-          '
+          EOF
+          
+          # Jalankan file Python
+          python3 generate.py
 
-      - name: Push Sakura SVG to output branch
-        uses: crazy-max/ghaction-github-pages@v4
+      - name: Push to output branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          target_branch: output
-          build_dir: .
-          keep_history: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: output
+          publish_dir: ./dist
+          force_orphan: true
